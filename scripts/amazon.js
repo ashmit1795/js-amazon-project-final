@@ -1,4 +1,6 @@
 let productsHTML = ``;
+
+//Generating HTML for Each product for its container 
 products.forEach((product)=>{
     productsHTML += `
     <div class="product-container">
@@ -52,9 +54,11 @@ products.forEach((product)=>{
     `;
 });
 
+//And, finally rendering it into the web page
 document.querySelector(".products-grid")
     .innerHTML = productsHTML;
 
+// Add to Cart
 document.querySelectorAll(".add-to-cart-button")
     .forEach((button)=>{
         button.addEventListener("click", ()=>{
@@ -74,8 +78,13 @@ document.querySelectorAll(".add-to-cart-button")
                     quantity: 1
                 });
             }
-            console.log(cart);
+
+            let cartQty = 0;
+
+            cart.forEach((item)=>{
+                cartQty += item.quantity;
+            })
+
+            document.querySelector(".cart-quantity").innerHTML = `${cartQty}`;
         });
     })
-
-    
