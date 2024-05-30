@@ -1,3 +1,5 @@
+import { cart } from '../data/cart.js';
+
 let productsHTML = ``;
 
 //Generating HTML for Each product for its container 
