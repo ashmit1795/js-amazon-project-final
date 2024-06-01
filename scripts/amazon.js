@@ -2,7 +2,7 @@ import { cart, addToCart } from '../data/cart.js';
 import { products } from "../data/products.js";
 
 let productsHTML = ``;
-
+updateCartQty();
 //Generating HTML for Each product for its container 
 products.forEach((product)=>{
     productsHTML += `
