@@ -81,7 +81,6 @@ document.querySelectorAll(".add-to-cart-button")
             let qty = Number(document.querySelector(`.quantity-selector-${productId}`).value);
             addToCart(productId, qty);
             updateCartQty();
-
         });
     })
 
