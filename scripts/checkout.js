@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateCartQuantity } from "../data/cart.js";
+import { cart, removeFromCart, calculateCartQuantity, updateQty } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -36,11 +36,13 @@ cart.forEach((cartItem)=>{
             </div>
             <div class="product-quantity">
             <span>
-                Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                Quantity: <span class="quantity-label quantity-label-${matchingItem.id}">${cartItem.quantity}</span>
             </span>
-            <span class="update-quantity-link link-primary">
+            <span class="update-quantity-link link-primary" data-product-id = "${matchingItem.id}">
                 Update
             </span>
+            <input class = "quantity-input">
+            <span class = "save-quantity-link link-primary" data-product-id = "${matchingItem.id}">Save</span>
             <span class="delete-quantity-link link-primary" data-product-id = "${matchingItem.id}">
                 Delete
             </span>
@@ -113,3 +115,29 @@ document.querySelectorAll(".delete-quantity-link")
 function updateCartQty() {
     document.querySelector(".cart-quantity").innerHTML = `${calculateCartQuantity()}`;
 }
+
+document.querySelectorAll(".update-quantity-link")
+    .forEach((link) => {
+        link.addEventListener("click", () =>{
+            let productId = link.dataset.productId;
+            let itemContainer = document.querySelector(`.cart-item-container-${productId}`);
+            itemContainer.classList.add("is-editing-quantity");
+        })
+    });
+
+    document.querySelectorAll(".save-quantity-link")
+    .forEach((link) => {
+        link.addEventListener("click", () =>{
+            let productId = link.dataset.productId;
+            let itemContainer = document.querySelector(`.cart-item-container-${productId}`);
+            itemContainer.classList.remove("is-editing-quantity");
+            let newQty = Number(document.querySelector(`.cart-item-container-${productId} .quantity-input`).value);
+            if (newQty < 0 || newQty >= 100) {
+                alert(`Quantity must be at least 0 and less than 1000`);
+                return;
+            }
+            document.querySelector(`.quantity-label-${productId}`).innerHTML = newQty;
+            updateQty(productId, newQty);
+            updateCartQty();
+        });
+    })
