@@ -11,11 +11,12 @@ export let cart = JSON.parse(localStorage.getItem('cart')) ||
     }
 ];
 
+// Function to save the cart into local storage
 function saveToStorage(){
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-//Function to add items to cart an₫to manage the cart
+//Function to add items to cart and to manage the cart
 export function addToCart(productId, qty) {
     let matchingItem;
     cart.forEach((cartItem)=>{
@@ -35,6 +36,7 @@ export function addToCart(productId, qty) {
     saveToStorage();
 }
 
+// Function to remove item from cart
 export function removeFromCart(productId) {
     let newCart = [];
 
@@ -49,6 +51,7 @@ export function removeFromCart(productId) {
     
 }
 
+// Function to calculate cart quantity
 export function calculateCartQuantity() {
     let cartQty = 0;
     cart.forEach((cartItem)=>{

@@ -2,8 +2,10 @@ import { cart, removeFromCart, calculateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
-
+// Update the cart quantity when the page is loaded
 updateCartQty();
+
+//Generating HTML to render the web page
 let cartSummaryHTML = ``;
 cart.forEach((cartItem)=>{
     const productId = cartItem.productId;
@@ -96,6 +98,7 @@ cart.forEach((cartItem)=>{
 
 document.querySelector(".order-summary").innerHTML = cartSummaryHTML;
 
+// Delete an item from cart and render the page
 document.querySelectorAll(".delete-quantity-link")
     .forEach((link) => {
         link.addEventListener("click", () =>{

@@ -2,9 +2,11 @@ import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
-let productsHTML = ``;
+// Update the cart quantity when the page is loaded
 updateCartQty();
+
 //Generating HTML for Each product for its container 
+let productsHTML = ``;
 products.forEach((product)=>{
     productsHTML += `
     <div class="product-container">
