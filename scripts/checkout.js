@@ -132,7 +132,7 @@ document.querySelectorAll(".update-quantity-link")
             let itemContainer = document.querySelector(`.cart-item-container-${productId}`);
             itemContainer.classList.remove("is-editing-quantity");
             let newQty = Number(document.querySelector(`.cart-item-container-${productId} .quantity-input`).value);
-            if (newQty < 0 || newQty >= 100) {
+            if (newQty < 0 || newQty >= 1000) {
                 alert(`Quantity must be at least 0 and less than 1000`);
                 return;
             }
