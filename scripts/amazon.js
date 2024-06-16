@@ -68,9 +68,14 @@ function updateCartQty() {
     let cartQty = 0;
     cart.forEach((cartItem)=>{
         cartQty += cartItem.quantity;
-    })
+    });
 
-    document.querySelector(".cart-quantity").innerHTML = `${cartQty}`;
+    if (cartQty === 0) {
+    document.querySelector(".cart-quantity").innerHTML = ``;
+    } else {
+        document.querySelector(".cart-quantity").innerHTML = `${cartQty}`;
+    }
+
 }
 
 // Add to Cart
