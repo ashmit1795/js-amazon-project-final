@@ -77,6 +77,7 @@ export function calculateCartQuantity() {
     return cartQty;
 }
 
+// Function to Update Delivery Option
 export function updateDeliveryOption(productId, deliveryOptionId){
     let matchingItem;
 
