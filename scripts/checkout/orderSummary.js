@@ -3,6 +3,7 @@ import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs  from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 //Function to render the order summary web page
 export function renderOrderSummary() {
@@ -104,7 +105,8 @@ export function renderOrderSummary() {
                 let itemContainer = document.querySelector(`.cart-item-container-${productId}`);
                 itemContainer.remove();
                 updateCartQty();
-                renderOrderSummary();
+                // Render HTML for Payment Summary when a cart item is deleted
+                renderPaymentSummary();
             })
         });
 
@@ -135,6 +137,8 @@ export function renderOrderSummary() {
                 document.querySelector(`.quantity-label-${productId}`).innerHTML = newQty;
                 updateQty(productId, newQty);
                 updateCartQty();
+                // Render HTML for Payment Summary when the cart is updated and saved
+                renderPaymentSummary();
             });
         });
 
@@ -145,6 +149,7 @@ export function renderOrderSummary() {
                 updateDeliveryOption(productId, deliveryOptionId);
                 // Render HTML when updating delivery option(recursive function call)
                 renderOrderSummary();
+                renderPaymentSummary();
             });
         });
 }
