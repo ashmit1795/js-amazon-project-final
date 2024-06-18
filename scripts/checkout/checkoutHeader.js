@@ -1,3 +1,4 @@
+//Function to render HTML for checkout header in the checkout page 
 export function renderCheckoutHeader(qty){
     let checkoutHeaderHTML = 
     `

@@ -1,7 +1,6 @@
 import { cart, removeFromCart, calculateCartQuantity, updateQty, updateDeliveryOption } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
-import dayjs  from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
@@ -9,7 +8,7 @@ import { renderCheckoutHeader } from "./checkoutHeader.js";
 //Function to render the order summary web page
 export function renderOrderSummary() {
     // Update the cart quantity when the page is loaded
-    updateCartQty();
+    updateCheckoutHeader();
 
     //Generating HTML to render the web page
     let cartSummaryHTML = ``;
@@ -102,7 +101,7 @@ export function renderOrderSummary() {
             link.addEventListener("click", () =>{
                 let productId = link.dataset.productId;
                 removeFromCart(productId);
-                updateCartQty();
+                updateCheckoutHeader();
                 // Render HTML for Order Summary when a cart item is deleted
                 renderOrderSummary();
                 // Render HTML for Payment Summary when a cart item is deleted
@@ -110,7 +109,8 @@ export function renderOrderSummary() {
             })
         });
 
-    function updateCartQty() {
+    //Function to update the checkout header
+    function updateCheckoutHeader() {
         renderCheckoutHeader(calculateCartQuantity());
     }
 
@@ -134,9 +134,10 @@ export function renderOrderSummary() {
                     alert(`Quantity must be at least 1 and less than 1000`);
                     return;
                 }
-                document.querySelector(`.quantity-label-${productId}`).innerHTML = newQty;
                 updateQty(productId, newQty);
-                updateCartQty();
+                updateCheckoutHeader();
+                // Render HTML for Order Summary when the cart is updated and saved
+                renderOrderSummary();
                 // Render HTML for Payment Summary when the cart is updated and saved
                 renderPaymentSummary();
             });
