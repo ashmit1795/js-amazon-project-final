@@ -1,4 +1,4 @@
-import { formatCurrency } from "../scripts/utils/money.js";
+import { formatCurrency } from "../../scripts/utils/money.js";
 
 //Describe function is use to create a test suite and it function is use create tests inside the test suite
 describe('test suite: formatCurrency', () => { 
