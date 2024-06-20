@@ -95,18 +95,11 @@ class Cart{
         });
     
         matchingItem.deliveryOptionId = deliveryOptionId;
-        saveToStorage();
+        this.saveToStorage();
     }
 
 }
 
+export const cart = new Cart('cart-oop');
 
-const cart = new Cart('cart-oop');
-const businessCart = new Cart('cart-business');
-
-
-
-console.log(cart);
-console.log(cart instanceof Cart);
-console.log(businessCart);
 

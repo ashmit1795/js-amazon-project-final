@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateCartQuantity, updateQty, updateDeliveryOption } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
@@ -12,16 +12,13 @@ export function renderOrderSummary() {
 
     //Generating HTML to render the web page
     let cartSummaryHTML = ``;
-    cart.forEach((cartItem)=>{
+    cart.cartItems.forEach((cartItem)=>{
         const productId = cartItem.productId;
         const product = getProduct(productId);
 
         const deliveryOptionId = cartItem.deliveryOptionId;
         const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-        // const today = dayjs();
-        // const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
-        // const dateString = deliveryDate.format('dddd, MMMM D');
         const dateString = calculateDeliveryDate(deliveryOption);
         
 
@@ -100,7 +97,7 @@ export function renderOrderSummary() {
         .forEach((link) => {
             link.addEventListener("click", () =>{
                 let productId = link.dataset.productId;
-                removeFromCart(productId);
+                cart.removeFromCart(productId);
                 updateCheckoutHeader();
                 // Render HTML for Order Summary when a cart item is deleted
                 renderOrderSummary();
@@ -111,7 +108,7 @@ export function renderOrderSummary() {
 
     //Function to update the checkout header
     function updateCheckoutHeader() {
-        renderCheckoutHeader(calculateCartQuantity());
+        renderCheckoutHeader(cart.calculateCartQuantity());
     }
 
     document.querySelectorAll(".update-quantity-link")
@@ -134,7 +131,7 @@ export function renderOrderSummary() {
                     alert(`Quantity must be at least 1 and less than 1000`);
                     return;
                 }
-                updateQty(productId, newQty);
+                cart.updateQty(productId, newQty);
                 updateCheckoutHeader();
                 // Render HTML for Order Summary when the cart is updated and saved
                 renderOrderSummary();
@@ -147,7 +144,7 @@ export function renderOrderSummary() {
         .forEach((option) => {
             option.addEventListener("click", () =>{
                 const { productId, deliveryOptionId} = option.dataset;
-                updateDeliveryOption(productId, deliveryOptionId);
+                cart.updateDeliveryOption(productId, deliveryOptionId);
                 // Render HTML when updating delivery option(recursive function call)
                 renderOrderSummary();
                 renderPaymentSummary();
