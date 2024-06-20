@@ -1,16 +1,16 @@
 //Class is basically object generator
 
 class Cart{
-    cartItems;
-    localStorageKey;
+    cartItems; //Public Property
+    #localStorageKey; //Public Property, it can only bes used inside the class/object generated
 
     constructor(localStorageKey){
-        this.localStorageKey = localStorageKey;
-        this.loadFromStorage();
+        this.#localStorageKey = localStorageKey;
+        this.#loadFromStorage();
     }
 
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) ||
+    #loadFromStorage() {
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) ||
     
         [
             {
@@ -27,7 +27,7 @@ class Cart{
     }
 
     saveToStorage(){
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
     addToCart(productId, qty = 1) {
