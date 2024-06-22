@@ -2,6 +2,7 @@ import { cart } from "../../data/cart-class.js";
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js"
 import { formatCurrency } from "../utils/money.js";
+import { addOrder } from "../../data/orders.js";
 
 
 export function renderPaymentSummary(){
@@ -67,4 +68,25 @@ export function renderPaymentSummary(){
     `
 
     document.querySelector(".payment-summary").innerHTML = paymentSummaryHTML;
+
+    document.querySelector(".place-order-button").addEventListener("click", async () =>{
+        if (cart.cartItems.length === 0) {
+            alert("Cart is Empty!");
+            window.location.href = 'amazon.html';
+        } else {
+            let response = await fetch('https://supersimplebackend.dev/orders', {
+                method: 'POST',
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body: JSON.stringify({ 
+                    cart : cart
+                })
+            });
+            let order = await response.json();
+    
+            addOrder(order);
+            window.location.href = 'orders.html';
+        }
+    });
 }
