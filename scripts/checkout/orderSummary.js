@@ -12,6 +12,15 @@ export function renderOrderSummary() {
 
     //Generating HTML to render the web page
     let cartSummaryHTML = ``;
+
+    if (cart.cartItems.length === 0) {
+        cartSummaryHTML += `
+            <div> Your cart is empty. </div>
+            <a class="button-primary view-products-link" href="amazon.html"> 
+                View products 
+            </a>
+        `
+    }
     cart.cartItems.forEach((cartItem)=>{
         const productId = cartItem.productId;
         const product = getProduct(productId);

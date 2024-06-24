@@ -21,6 +21,8 @@ export function renderPaymentSummary(){
     const taxCents = totalBeforeTaxCents*0.1;
     const totalCents = totalBeforeTaxCents + taxCents;
 
+    let isPaymentBtnDisabled = cart.cartItems.length === 0 ? 'payment-button-disabled' : '';
+
     let paymentSummaryHTML = ``;
     paymentSummaryHTML += `
         <div class="payment-summary-title">
@@ -62,7 +64,7 @@ export function renderPaymentSummary(){
             </div>
         </div>
 
-        <button class="place-order-button button-primary">
+        <button class="place-order-button button-primary ${isPaymentBtnDisabled}">
             Place your order
         </button>
     `
@@ -72,7 +74,6 @@ export function renderPaymentSummary(){
     document.querySelector(".place-order-button").addEventListener("click", async () =>{
         if (cart.cartItems.length === 0) {
             alert("Cart is Empty!");
-            window.location.href = 'amazon.html';
         } else {
             let response = await fetch('https://supersimplebackend.dev/orders', {
                 method: 'POST',
