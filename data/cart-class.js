@@ -41,7 +41,7 @@ class Cart{
         if (matchingItem) {
             matchingItem.quantity += qty;
         } else {
-            this.cartItems.push({
+            this.cartItems.unshift({
                 productId: productId,
                 quantity: qty,
                 deliveryOptionId: '1'

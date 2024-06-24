@@ -13,7 +13,7 @@ let filteredProducts = products;
 
 let url = new URL(window.location.href);
 let searchQuery = url.searchParams.get("search");
-console.log(searchQuery)
+
 if (searchQuery) {
     filteredProducts = products.filter((product) =>{
         return product.name.toLowerCase().includes(searchQuery) || product.keywords.includes(searchQuery);
@@ -65,7 +65,7 @@ filteredProducts.forEach((product)=>{
 
         ${product.extraInfoHTML()}
         <div class="product-spacer"></div>
-        <div class="added-to-cart">
+        <div class="added-to-cart added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
         </div>
@@ -84,11 +84,22 @@ document.querySelector(".products-grid")
 // Add to Cart
 document.querySelectorAll(".add-to-cart-button")
     .forEach((button)=>{
+        let addedMessageTimeoutId;
         button.addEventListener("click", ()=>{
             const productId = button.dataset.productId;
             let qty = Number(document.querySelector(`.quantity-selector-${productId}`).value);
             cart.addToCart(productId, qty);
             updateCartQtyHeader();
+            document.querySelector(`.added-to-cart-${productId}`).classList.add("added");
+
+            if (addedMessageTimeoutId) {
+                clearTimeout(addedMessageTimeoutId)
+            }
+            const timeoutId = setTimeout(()=>{
+                document.querySelector(`.added-to-cart-${productId}`).classList.remove("added");
+            }, 2000);
+
+            addedMessageTimeoutId = timeoutId;
         });
     })
 
