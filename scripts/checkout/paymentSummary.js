@@ -4,11 +4,13 @@ import { getDeliveryOption } from "../../data/deliveryOptions.js"
 import { formatCurrency } from "../utils/money.js";
 import { addOrder } from "../../data/orders.js";
 
-
+//Function to render the payment summary section of the web page
 export function renderPaymentSummary(){
     let productPriceCents = 0;
     let shippingPriceCents = 0;
     let totalItems = 0;
+
+    //Generating HTML to render the section
     cart.cartItems.forEach((cartItem) => {
         let product = getProduct(cartItem.productId)
         let deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
@@ -19,8 +21,10 @@ export function renderPaymentSummary(){
     });
     const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
     const taxCents = totalBeforeTaxCents*0.1;
+    //Total cost of order
     const totalCents = totalBeforeTaxCents + taxCents;
 
+    //If cart is empty then the 'Place your order' button is disabled
     let isPaymentBtnDisabled = cart.cartItems.length === 0 ? 'payment-button-disabled' : '';
 
     let paymentSummaryHTML = ``;
@@ -71,6 +75,7 @@ export function renderPaymentSummary(){
 
     document.querySelector(".payment-summary").innerHTML = paymentSummaryHTML;
 
+    //Make the place your order functional using the backend
     document.querySelector(".place-order-button").addEventListener("click", async () =>{
         if (cart.cartItems.length === 0) {
             alert("Cart is Empty!");

@@ -5,12 +5,12 @@ import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../..
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
-//Function to render the order summary web page
+//Function to render the order summary section of the web page
 export function renderOrderSummary() {
     // Update the cart quantity when the page is loaded
     updateCheckoutHeader();
 
-    //Generating HTML to render the web page
+    //Generating HTML to render the section
     let cartSummaryHTML = ``;
 
     if (cart.cartItems.length === 0) {
@@ -74,6 +74,7 @@ export function renderOrderSummary() {
 
     document.querySelector(".order-summary").innerHTML = cartSummaryHTML;
 
+    //Function to generate delivery option HTML for cartItem
     function deliveryOptionsHTML(productId, cartItem) {
         let html = ``;
         deliveryOptions.forEach( (deliveryOption)=>{
@@ -100,7 +101,7 @@ export function renderOrderSummary() {
         });
         return html;
     }
-
+ 
     // Delete an item from cart and render the page
     document.querySelectorAll(".delete-quantity-link")
         .forEach((link) => {
@@ -120,6 +121,7 @@ export function renderOrderSummary() {
         renderCheckoutHeader(cart.calculateCartQuantity());
     }
 
+    //To make the update button functional
     document.querySelectorAll(".update-quantity-link")
         .forEach((link) => {
             link.addEventListener("click", () =>{
@@ -129,6 +131,7 @@ export function renderOrderSummary() {
             });
         });
 
+    //To save the updated quantity
     document.querySelectorAll(".save-quantity-link")
         .forEach((link) => {
             link.addEventListener("click", () =>{

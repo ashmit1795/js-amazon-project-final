@@ -8,8 +8,7 @@ let url = new URL(window.location.href)
 let productId = url.searchParams.get('productId');
 let orderId = url.searchParams.get('orderId');
 
-console.log(getProductDetails(productId, getOrder(orderId)));
-
+//Function to load the tracking web page
 function loadPage(){
     updateCartQtyHeader();
     let trackingHTML = ``;
@@ -18,7 +17,7 @@ function loadPage(){
     let productDetails = getProductDetails(productId, orderDetails);
     let deliveryDateString = dayjs(productDetails.estimatedDeliveryTime).format('dddd, MMMM D');
 
-    //Calculate the progress bar percentage
+    //To calculate the progress bar percentage
     let today = dayjs();
     let estimatedDeliveryTime = dayjs(productDetails.estimatedDeliveryTime)
     let orderTime = dayjs(orderDetails.orderTime);
@@ -69,7 +68,7 @@ function loadPage(){
 loadPage();
 
 
-
+//Function to get details of a particular ordered product
 function getProductDetails(productId, order){
     let matchingProduct;
 
@@ -82,6 +81,7 @@ function getProductDetails(productId, order){
     return matchingProduct;
 }
 
+//To make the search bar functional
 document.querySelector(".search-button").addEventListener("click", ()=>{
     let searchInput = document.querySelector(".search-bar").value.toLowerCase();
     window.location.href = `amazon.html?search=${searchInput}`;

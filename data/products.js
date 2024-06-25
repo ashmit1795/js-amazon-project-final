@@ -66,6 +66,7 @@ class Appliance extends Product{
 
 export let products = await loadProducts();
 
+//Function to load products from the backend and wrapping up the product object with the product class
 async function loadProducts(){
   let products = [];
   let response = await fetch('https://supersimplebackend.dev/products');
@@ -87,6 +88,7 @@ async function loadProducts(){
 
 
 /*
+// Products array that contains product object generated using the product class
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",

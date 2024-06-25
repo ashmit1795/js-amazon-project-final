@@ -27,11 +27,13 @@ export function getDeliveryOption(deliveryOptionId){
     return matchingDeliveryOption || deliveryOptions[0];
 }
 
+//Function to check wether a day is weekend or not
 function isWeekend(date) {
     let day = date.format('dddd');
     return day === 'Sunday' || day === 'Saturday';
 }
 
+//Function to calculate the delivery date (delivery date doesn't fall on weekend)
 export function calculateDeliveryDate(deliveryOption){
     let deliveryDate = dayjs();
     let remainingDays = deliveryOption.deliveryDays;

@@ -1,14 +1,16 @@
 //Class is basically object generator
 
+//This is the class to create the cart object that includes cartItems and various cart functions
 class Cart{
     cartItems; //Public Property
-    #localStorageKey; //Public Property, it can only bes used inside the class/object generated
+    #localStorageKey; //Private Property, it can only bes used inside the class/object generated
 
     constructor(localStorageKey){
         this.#localStorageKey = localStorageKey;
         this.#loadFromStorage();
     }
 
+    //Function to load cart items from localStorage or use default cart items
     #loadFromStorage() {
         this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) ||
     
@@ -26,10 +28,12 @@ class Cart{
         ];
     }
 
+    //Function to save cart into the localStorage
     saveToStorage(){
         localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
+    //Function to add an item to the cart
     addToCart(productId, qty = 1) {
         let matchingItem;
         this.cartItems.forEach((cartItem)=>{
@@ -50,6 +54,7 @@ class Cart{
         this.saveToStorage();
     }
 
+    //Function to remove an item from the cart
     removeFromCart(productId) {
         let newCart = [];
     
@@ -64,6 +69,7 @@ class Cart{
         
     }
 
+    //Function to update the quantity of a particular cart item
     updateQty(productId, newQty) {
         let matchingItem;
         this.cartItems.forEach((cartItem) =>{
@@ -76,6 +82,7 @@ class Cart{
         this.saveToStorage();
     }
 
+    //Function to calculate the total cart quantity
     calculateCartQuantity() {
         let cartQty = 0;
         this.cartItems.forEach((cartItem)=>{
@@ -85,6 +92,7 @@ class Cart{
         return cartQty;
     }
 
+    //Function to update the deliverOptionId of a particular cart item
     updateDeliveryOption(productId, deliveryOptionId){
         let matchingItem;
     
@@ -98,6 +106,7 @@ class Cart{
         this.saveToStorage();
     }
 
+    //Function to reset the cart
     resetCart(){
         this.cartItems = [];
         this.saveToStorage();
@@ -105,6 +114,7 @@ class Cart{
 
 }
 
+//Cart object is generated
 export const cart = new Cart('cart-oop');
 
 

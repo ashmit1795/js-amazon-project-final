@@ -5,14 +5,15 @@ import dayjs  from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { cart } from "../data/cart-class.js";
 import { updateCartQtyHeader } from "./header.js";
 
+//Function to load the page
 function loadPage(){
     let ordersHTML = ``;
     updateCartQtyHeader();
+    //Generating HTML to render the order container
     orders.forEach((order) => {
         const orderTimeString = dayjs(order.orderTime).format('MMMM D');
             ordersHTML += `
                 <div class="order-container">
-
                     <div class="order-header">
                         <div class="order-header-left-section">
                             <div class="order-date">
@@ -41,6 +42,7 @@ function loadPage(){
 
     document.querySelector(".orders-grid").innerHTML = ordersHTML;
 
+    //To make the buy again button interactive
     document.querySelectorAll(".buy-again-button").forEach((button)=>{
         button.addEventListener("click", ()=>{
             cart.addToCart(button.dataset.productId);
@@ -59,6 +61,7 @@ function loadPage(){
 
 loadPage();
 
+//Function to generate HTML to render the order details inside the order container
 function renderOrderDetailsGrid(order){
     let orderDetailsGridHTML = ``;
     
@@ -112,6 +115,7 @@ function renderOrderDetailsGrid(order){
     return orderDetailsGridHTML; 
 }
 
+//To make the search bar functional
 document.querySelector(".search-button").addEventListener("click", ()=>{
     let searchInput = document.querySelector(".search-bar").value.toLowerCase();
     window.location.href = `amazon.html?search=${searchInput}`;

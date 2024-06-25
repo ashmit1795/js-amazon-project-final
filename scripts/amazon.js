@@ -14,6 +14,7 @@ let filteredProducts = products;
 let url = new URL(window.location.href);
 let searchQuery = url.searchParams.get("search");
 
+//To filter products based on search query
 if (searchQuery) {
     filteredProducts = products.filter((product) =>{
         return product.name.toLowerCase().includes(searchQuery) || product.keywords.includes(searchQuery);
@@ -103,6 +104,7 @@ document.querySelectorAll(".add-to-cart-button")
         });
     })
 
+//To make the search bar functional
 document.querySelector(".search-button").addEventListener("click", ()=>{
     let searchInput = document.querySelector(".search-bar").value.toLowerCase();
     window.location.href = `amazon.html?search=${searchInput}`;
