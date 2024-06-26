@@ -16,7 +16,7 @@ export function renderOrderSummary() {
     if (cart.cartItems.length === 0) {
         cartSummaryHTML += `
             <div> Your cart is empty. </div>
-            <a class="button-primary view-products-link" href="amazon.html"> 
+            <a class="button-primary view-products-link" href="index.html"> 
                 View products 
             </a>
         `
