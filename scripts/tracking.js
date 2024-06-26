@@ -84,12 +84,12 @@ function getProductDetails(productId, order){
 //To make the search bar functional
 document.querySelector(".search-button").addEventListener("click", ()=>{
     let searchInput = document.querySelector(".search-bar").value.toLowerCase();
-    window.location.href = `amazon.html?search=${searchInput}`;
+    window.location.href = `index.html?search=${searchInput}`;
 });
 
 document.querySelector(".search-bar").addEventListener("keydown", (e)=>{
     if(e.key === "Enter"){
         let searchInput = document.querySelector(".search-bar").value.toLowerCase();
-        window.location.href = `amazon.html?search=${searchInput}`;
+        window.location.href = `index.html?search=${searchInput}`;
     }
 })
