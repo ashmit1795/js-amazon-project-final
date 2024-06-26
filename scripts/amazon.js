@@ -1,5 +1,5 @@
 // import { cart, addToCart, calculateCartQuantity } from '../data/cart.js';
-import { cart } from '../data/cart-class.js'
+import { cart } from '../data/cart.js'
 import { products } from "../data/products.js";
 import { updateCartQtyHeader } from './header.js';
 

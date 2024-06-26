@@ -1,4 +1,4 @@
-import { cart } from "../data/cart-class.js";
+import { cart } from "../data/cart.js";
 
 //Function to update cart quantity on the web page
 export function updateCartQtyHeader() {

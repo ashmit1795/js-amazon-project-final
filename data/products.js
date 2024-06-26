@@ -64,30 +64,7 @@ class Appliance extends Product{
   }
 }
 
-export let products = await loadProducts();
 
-//Function to load products from the backend and wrapping up the product object with the product class
-async function loadProducts(){
-  let products = [];
-  let response = await fetch('https://supersimplebackend.dev/products');
-  let productsData = await response.json();
-  products = productsData.map((productDetails) => {
-    if (productDetails.type === "clothing") {
-      return new Clothing(productDetails)
-    }
-    
-    if (productDetails.type === "appliance") {
-      return new Appliance(productDetails)
-    }
-    
-    return new Product(productDetails);
-  });
-
-  return products;
-}
-
-
-/*
 // Products array that contains product object generated using the product class
 export const products = [
   {
@@ -192,6 +169,7 @@ export const products = [
       count: 317
     },
     priceCents: 2400,
+    type: "clothing",
     keywords: [
       "hoodies",
       "sweaters",
@@ -753,6 +731,7 @@ export const products = [
       count: 3157
     },
     priceCents: 2400,
+    type: "clothing",
     keywords: [
       "sweaters",
       "hoodies",
@@ -772,10 +751,6 @@ export const products = [
   return new Product(productDetails);
 });
 
-*/
-
-
-
 //Function to get the product using the product id
 export function getProduct(productId){
   let matchingProduct;
@@ -786,3 +761,26 @@ export function getProduct(productId){
   });
   return matchingProduct;
 }
+
+
+// //Function to load products from the backend and wrapping up the product object with the product class
+// export let products = await loadProducts();
+
+// async function loadProducts(){
+//   let products = [];
+//   let response = await fetch('https://supersimplebackend.dev/products');
+//   let productsData = await response.json();
+//   products = productsData.map((productDetails) => {
+//     if (productDetails.type === "clothing") {
+//       return new Clothing(productDetails)
+//     }
+    
+//     if (productDetails.type === "appliance") {
+//       return new Appliance(productDetails)
+//     }
+    
+//     return new Product(productDetails);
+//   });
+
+//   return products;
+// }
